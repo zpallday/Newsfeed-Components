@@ -1,7 +1,9 @@
 /* This is the data we will be using to create our article components */
 /* Look over this data, then proceed to line 91*/
+window.addEventListener('load', (e) => {
 const data = [
-  {
+
+{
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -112,3 +114,50 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+const articleCon = document.querySelector('.articles');
+
+data.forEach( data => { 
+console.log(('creating data:', data.title))
+articleCon.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph ))
+})
+
+function createArticle(titles, dates, firstP, secondP, thirdP) {
+
+const article = document.createElement('div');
+const title = document.createElement('h2');
+const date = document.createElement('p');
+const firstParagraph = document.createElement('p');
+const secondParagraph = document.createElement('p');
+const thirdParagraph = document.createElement('p');
+const expandButton = document.createElement('span');
+
+article.appendChild(title);
+article.appendChild(date);
+article.appendChild(firstParagraph);
+article.appendChild(secondParagraph);
+article.appendChild(thirdParagraph);
+article.appendChild(expandButton);
+
+
+title.classList.add('h2');
+date.classList.add('date');
+article.classList.add('article');
+expandButton.classList.add('expandButton');
+
+
+title.textContent = titles;
+date.textContent = dates;
+firstParagraph.textContent = firstP;
+secondParagraph.textContent = secondP;
+thirdParagraph.textContent = thirdP; 
+expandButton.textContent = 'expand'
+
+
+expandButton.addEventListener('click', e => {
+  article.classList.toggle('article-open');
+})
+
+return article;
+}
+})
